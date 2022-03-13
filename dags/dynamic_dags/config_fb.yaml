@@ -1,0 +1,4 @@
+dag_id: 'FB'
+schedule_interval: '@weekly'
+catchup: False
+input: 198

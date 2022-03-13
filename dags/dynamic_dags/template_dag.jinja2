@@ -1,0 +1,24 @@
+from airflow import DAG
+from airflow.decorators import task
+from datetime import datetime
+
+with DAG(dag_id="get_price_{{ dag_id }}",
+         start_date=datetime(2021, 1, 1),
+         schedule_interval="{{ schedule_interval }}",
+         catchup={{catchup or False}}) as dag:
+    @task
+    def extract(symbol):
+        return symbol
+
+
+    @task
+    def process(symbol):
+        return symbol
+
+
+    @task
+    def store(symbol):
+        return symbol
+
+
+    store(process(extract({{input}})))
